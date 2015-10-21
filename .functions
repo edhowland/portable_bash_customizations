@@ -67,3 +67,7 @@ lsd ()
 { 
     ls -1 -l "$1" | awk '{print $9, $6, $7}'
 }
+set_ps1 () 
+{ 
+    export PS1=$1
+}

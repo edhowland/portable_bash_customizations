@@ -1,0 +1,4 @@
+#!/bin/bash
+# installs these aliases and shell functions
+source ./.aliases
+source ./.functions
