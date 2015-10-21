@@ -1,0 +1,69 @@
+# ~/.functions - shell functions
+
+# Edit and a Ruby file and chekc its syntax
+vr () 
+{ 
+    vi $1 $2;
+    [ "$2" ] && shift;
+  sleep 1
+    ruby -c $1
+}
+
+makelib() {
+    echo "# ${1}.rb - requires files in $1" > $1.rb
+  for f in $1/*.rb
+  do
+  echo "require \"#{File.dirname(__FILE__)}/$f\"" >> $1.rb
+  done
+}
+
+
+gam() {
+  git commit -am "\'$*\'"
+}
+
+mkspec() {
+  (cd ~/src/docker/templates; ./simple_spec_templ.rb $1)
+}
+
+mrb() {
+  echo "# $1 - .." > $1
+  echo Now start editing $1
+}
+
+mxrb() {
+  echo '#!/usr/bin/env ruby' > $1
+  echo "# $1 - ..." >> $1
+  chmod +x $1
+  echo "Now edit $1"
+}
+mrs () 
+{ 
+    name=${1}_spec.rb;
+    echo "# $name - specs for $1" > $name;
+  echo '' >> $name
+  echo "require_relative 'spec_helper'" >> $name
+    echo Now edit: $name
+}
+mrl () 
+{ 
+    file=${1}.rb;
+    mkdir -p $1;
+    mrb $file;
+    echo Summary of actions:;
+    echo Directory $1 created;
+    echo $file created;
+    echo Now add require_relative \'$1/...\' to $file
+}
+instance_name () 
+{ 
+    echo ~/.aws/instances/instance_${1}.json
+}
+lst () 
+{ 
+    ls -1 -l "$1" | awk '{print $9, $8}'
+}
+lsd () 
+{ 
+    ls -1 -l "$1" | awk '{print $9, $6, $7}'
+}
