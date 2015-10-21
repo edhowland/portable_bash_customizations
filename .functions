@@ -71,3 +71,7 @@ set_ps1 ()
 { 
     export PS1=$1
 }
+bchk () 
+{ 
+    bash -n $1 && echo Syntax OK
+}
